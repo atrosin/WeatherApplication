@@ -8,8 +8,6 @@ public class NetworkService {
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/";
     private final static String KEY ="a4957aaded07f32de759ac6ddc1e610b";
 
-
-
     public static String getKEY() {
         return KEY;
     }
