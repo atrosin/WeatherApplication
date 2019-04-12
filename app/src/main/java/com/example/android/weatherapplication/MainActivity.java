@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
@@ -14,40 +16,40 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-
+    private EditText cityEdit;
+    private RecyclerView recyclerView;
     private WheatherInfoAdapter wheatherInfoAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initRecyclerView();
+        cityEdit = (EditText)findViewById(R.id.edit_city);
 
-        NetworkService.getSingleInst()
-        .getCallPlace()
-        .getData("London",NetworkService.getKEY())
-        .enqueue(new Callback<SumResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<SumResponse> call, @NonNull Response<SumResponse> response) {
-                System.out.println(call.request().toString());
-                //SumResponse sumResponse = response.body();
-                ArrayList<SumResponse.TargetObj> arrayList = new ArrayList<>(response.body().getList());
-                wheatherInfoAdapter.setRecycleItems(arrayList);
-                System.out.println(arrayList.get(0).main.toString());
-
-            }
-
-            @Override
-            public void onFailure(Call<SumResponse> call, Throwable t) {
-                Log.e(this.toString(),"What a...? "+call.request().toString()+" "+t);
-
-            }
-});
     }
-    private RecyclerView recyclerView;
     private void initRecyclerView(){
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         wheatherInfoAdapter = new WheatherInfoAdapter();
         recyclerView.setAdapter(wheatherInfoAdapter);
+    }
+
+    public void startSearch(View view) {
+        NetworkService.getSingleInst()
+                .getCallPlace()
+                .getData(cityEdit.getText().toString(),NetworkService.getKEY(),"metric")
+                .enqueue(new Callback<SumResponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<SumResponse> call, @NonNull Response<SumResponse> response) {
+                        SumResponse sumResponse = response.body();
+                        wheatherInfoAdapter.setRecycleItems(sumResponse.getList());
+                    }
+
+                    @Override
+                    public void onFailure(Call<SumResponse> call, Throwable t) {
+                        Log.e(this.toString(),"What a...? "+t+" "+call.request().toString());
+
+                    }
+                });
     }
 }

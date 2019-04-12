@@ -7,14 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class WheatherInfoAdapter extends RecyclerView.Adapter<WheatherInfoAdapter.WheatherViewHolder> {
-    private List<SumResponse.TargetObj> recycleItems = new ArrayList<>();
+    private List<ObjMain> recycleItems = new ArrayList<>();
 
-    public void setRecycleItems(Collection<SumResponse.TargetObj> items) {
+    public void setRecycleItems(Collection<ObjMain> items) {
         recycleItems.addAll(items);
         notifyDataSetChanged();
     }
@@ -25,13 +27,13 @@ public class WheatherInfoAdapter extends RecyclerView.Adapter<WheatherInfoAdapte
 
     @NonNull
     @Override
-    public WheatherViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public WheatherViewHolder onCreateViewHolder(@NotNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recclr_item,viewGroup,false);
         return new WheatherViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder( WheatherViewHolder wheatherViewHolder, int position) {
+    public void onBindViewHolder(@NotNull WheatherViewHolder wheatherViewHolder, int position) {
             wheatherViewHolder.bind(recycleItems.get(position));
     }
 
@@ -46,10 +48,8 @@ public class WheatherInfoAdapter extends RecyclerView.Adapter<WheatherInfoAdapte
             super(itemView);
             wheatherText = itemView.findViewById(R.id.theText);
         }
-        public void bind(SumResponse.TargetObj response){
-            String str = "RESPONSE";
-
-            wheatherText.setText(response.getMain().toString()+str);
+        public void bind(ObjMain response){
+            wheatherText.setText(response.getTemp());
         }
     }
 }

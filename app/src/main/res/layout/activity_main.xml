@@ -5,34 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <EditText
+            android:id="@+id/edit_city"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/city"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textColorHighlight="@color/colorAccent"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/find_button"
+            android:layout_width="72dp"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+            android:hint="@string/find"
+            android:onClick="startSearch"
+            />
 
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_marginBottom="8dp"
+        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
     </android.support.v7.widget.RecyclerView>
-<!--
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:hint="@string/enter_city"
-        android:textColorHint="@color/colorPrimaryDark"
-        android:textColorHighlight="@color/colorAccent"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="0dp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="6dp"
-        android:background="@color/aqua"
-        android:layout_marginBottom="8dp"
-        />
--->
+
 
 
 </LinearLayout>
