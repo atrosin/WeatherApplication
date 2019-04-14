@@ -1,4 +1,4 @@
-package com.example.android.weatherapplication;
+package com.example.android.weatherapplication.Retro;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

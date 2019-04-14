@@ -9,7 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import java.util.ArrayList;
+import com.example.android.weatherapplication.Retro.NetworkService;
+import com.example.android.weatherapplication.Retro.SumResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initRecyclerView();
         cityEdit = (EditText)findViewById(R.id.edit_city);
+        cityEdit.setText("Deli");
 
     }
     private void initRecyclerView(){
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(@NonNull Call<SumResponse> call, @NonNull Response<SumResponse> response) {
                         SumResponse sumResponse = response.body();
                         wheatherInfoAdapter.setRecycleItems(sumResponse.getList());
+                        System.out.println(sumResponse.getList().get(0).getTempInfo().getTemp_min());
                     }
 
                     @Override

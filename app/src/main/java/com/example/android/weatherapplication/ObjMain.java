@@ -2,35 +2,55 @@ package com.example.android.weatherapplication;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class ObjMain {
+
     public class Temp{
-        Double temp;
-        Double min_temp;
-        Double max_temp;
+        private  Double temp;
+        private  Double temp_min;
+        private  Double temp_max;
+
+        public String getTemp() {
+            return String.valueOf(temp);
+        }
+
+        public String getTemp_min() {
+
+            return String.valueOf(Math.round(temp_min));
+        }
+
+        public String getTemp_max() {
+            return String.valueOf(Math.round(temp_max));
+        }
     }
     public class WeatherDescr{
-        String general;
-        String icon;
+        private String main;
+        public String getMain() {
+            return main;
+        }
     }
+
+    @SerializedName("dt_txt")
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
     @SerializedName("main")
-    private Temp temp;
+    private Temp tempInfo;
 
-   // @SerializedName("weather") its list
-    private WeatherDescr description;
+    public Temp getTempInfo() {
+        return tempInfo;
+    }
 
-    public WeatherDescr getDescription() {
+    @SerializedName("weather")
+    private List<WeatherDescr> description;
+
+    public List<WeatherDescr> getDescription() {
         return description;
     }
 
-    public String getTemp() {
-        return String.valueOf(temp.temp);
-    }
 
-    public String getMin_temp() {
-        return String.valueOf(temp.min_temp);
-    }
-
-    public String getMax_temp() {
-        return String.valueOf(temp.max_temp);
-    }
 }

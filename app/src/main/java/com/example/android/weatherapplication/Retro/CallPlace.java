@@ -1,6 +1,4 @@
-package com.example.android.weatherapplication;
-
-import java.util.List;
+package com.example.android.weatherapplication.Retro;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

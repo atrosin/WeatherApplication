@@ -43,13 +43,17 @@ public class WheatherInfoAdapter extends RecyclerView.Adapter<WheatherInfoAdapte
     }
 
     class WheatherViewHolder extends RecyclerView.ViewHolder {
-        private TextView wheatherText;
+        private TextView dayInfo;
+        private  TextView tempInfo;
         public WheatherViewHolder(@NonNull View itemView) {
             super(itemView);
-            wheatherText = itemView.findViewById(R.id.theText);
+            dayInfo = itemView.findViewById(R.id.theDayInfo);
+            tempInfo = itemView.findViewById(R.id.tempInfo);
+
         }
         public void bind(ObjMain response){
-            wheatherText.setText(response.getTemp());
+            dayInfo.setText(response.getTime());
+            tempInfo.setText(/*response.getTempInfo().getTemp()*/String.format("%s°C / %s°C", response.getTempInfo().getTemp_min(), response.getTempInfo().getTemp_max()));
         }
     }
 }

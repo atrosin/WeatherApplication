@@ -1,5 +1,6 @@
-package com.example.android.weatherapplication;
+package com.example.android.weatherapplication.Retro;
 
+import com.example.android.weatherapplication.ObjMain;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
