@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.android.weatherapplication.Retro.NetworkService;
@@ -16,7 +17,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button fButton;
     private EditText cityEdit;
     private RecyclerView recyclerView;
     private WheatherInfoAdapter wheatherInfoAdapter;
@@ -26,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initRecyclerView();
         cityEdit = (EditText)findViewById(R.id.edit_city);
-        cityEdit.setText("Deli");
+        fButton = findViewById(R.id.find_button);
+        fButton.setOnClickListener(this);
 
     }
     private void initRecyclerView(){
@@ -36,23 +39,29 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(wheatherInfoAdapter);
     }
 
-    public void startSearch(View view) {
-        NetworkService.getSingleInst()
-                .getCallPlace()
-                .getData(cityEdit.getText().toString(),NetworkService.getKEY(),"metric")
-                .enqueue(new Callback<SumResponse>() {
-                    @Override
-                    public void onResponse(@NonNull Call<SumResponse> call, @NonNull Response<SumResponse> response) {
-                        SumResponse sumResponse = response.body();
-                        wheatherInfoAdapter.setRecycleItems(sumResponse.getList());
-                        System.out.println(sumResponse.getList().get(0).getTempInfo().getTemp_min());
-                    }
+    @Override
+    public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.find_button:
+                    NetworkService.getSingleInst()
+                            .getCallPlace()
+                            .getData(cityEdit.getText().toString(),NetworkService.getKEY(),"metric")
+                            .enqueue(new Callback<SumResponse>() {
+                                @Override
+                                public void onResponse(@NonNull Call<SumResponse> call, @NonNull Response<SumResponse> response) {
+                                    SumResponse sumResponse = response.body();
+                                    wheatherInfoAdapter.setRecycleItems(sumResponse.getList());
+                                }
 
-                    @Override
-                    public void onFailure(Call<SumResponse> call, Throwable t) {
-                        Log.e(this.toString(),"What a...? "+t+" "+call.request().toString());
+                                @Override
+                                public void onFailure(Call<SumResponse> call, Throwable t) {
+                                    Log.e(this.toString(),"What a...? "+t+" "+call.request().toString());
 
-                    }
-                });
+                                }
+                            });
+                    initRecyclerView();
+
+            }
     }
+
 }

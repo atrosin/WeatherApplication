@@ -29,7 +29,6 @@
             android:layout_height="48dp"
             android:layout_margin="8dp"
             android:hint="@string/find"
-            android:onClick="startSearch"
             />
 
     </LinearLayout>
