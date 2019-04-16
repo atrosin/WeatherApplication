@@ -53,7 +53,7 @@ public class WheatherInfoAdapter extends RecyclerView.Adapter<WheatherInfoAdapte
         }
         public void bind(ObjMain response){
             dayInfo.setText(response.getTime());
-            tempInfo.setText(/*response.getTempInfo().getTemp()*/String.format("%s°C ",String.valueOf(response.getTempInfo().getTemp())));
+            tempInfo.setText(/*response.getTempInfo().getTemp()*/String.format("%s°C ",String.valueOf(response.getTempInfo().temp)));
         }
     }
 }

@@ -3,26 +3,29 @@ package com.example.android.weatherapplication;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverter;
+import android.arch.persistence.room.TypeConverters;
 
+import com.example.android.weatherapplication.Room.DataConverter;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 @Entity
 public class ObjMain {
+
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    public long id;
 
     public ObjMain() {
     }
 
-    public long getId() {
+    /*public long getId() {
         return id;
-    }
+    }*/
+    public static class Temp{
 
-    public class Temp{
-
-        public Double getTemp() {
+        /*public Double getTemp() {
             return temp;
         }
 
@@ -34,52 +37,64 @@ public class ObjMain {
             return temp_max;
         }
 
-        private  Double temp;
-        private  Double temp_min;
-        private  Double temp_max;
+        public void setTemp(Double temp) {
+            this.temp = temp;
+        }
+
+        public void setTemp_min(Double temp_min) {
+            this.temp_min = temp_min;
+        }
+
+        public void setTemp_max(Double temp_max) {
+            this.temp_max = temp_max;
+        }*/
+
+        public  Double temp;
+        public  Double temp_min;
+        public  Double temp_max;
 
         public Temp() {
         }
-
-
     }
 
-    public class WeatherDescr{
+    public static class WeatherDescr{
 
-        private String main;
+        public String main = "";
+
+        public WeatherDescr() {
+
+        }
 
         public String getMain() {
             return main;
         }
 
-        public WeatherDescr() {
-        }
     }
+
+
+    @SerializedName("dt_txt")
+    public String time;
+
 
     public String getTime() {
         return time;
     }
 
-    @SerializedName("dt_txt")
-    private String time;
-
+    @Embedded
+    @SerializedName("main")
+    public Temp tempInfo;
 
     public Temp getTempInfo() {
         return tempInfo;
     }
 
-    @Embedded
-    @SerializedName("main")
-    private Temp tempInfo;
-
+    @TypeConverters(DataConverter.class)
+    @SerializedName("weather")
+    public List<WeatherDescr> description;
 
     public List<WeatherDescr> getDescription() {
         return description;
     }
-
-    @Embedded
-    @SerializedName("weather")
-    private List<WeatherDescr> description;
 
 
 
