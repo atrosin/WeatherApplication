@@ -14,6 +14,10 @@ import java.util.List;
 @Entity
 public class ObjMain {
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @PrimaryKey(autoGenerate = true)
     public long id;
 
@@ -61,8 +65,14 @@ public class ObjMain {
 
         public String main = "";
 
+        public String icon;
+
         public WeatherDescr() {
 
+        }
+
+        public String getIcon() {
+            return icon;
         }
 
         public String getMain() {

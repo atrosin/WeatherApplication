@@ -3,6 +3,7 @@ package com.example.android.weatherapplication.Room;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
@@ -18,12 +19,12 @@ public interface ObjMainDao {
     @Query("SELECT * from objmain WHERE id = :id")
     ObjMain getById(long id);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert (ObjMain objMain);
 
     @Update
     void update (ObjMain objMain);
 
-    @Delete
-    void delete (ObjMain objMain);
+    @Query("DELETE from objmain WHERE id = :id")
+    void delete (long id);
 }

@@ -27,6 +27,18 @@
         android:layout_toRightOf="@id/weatherImage"
         android:text="Day" />
 
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/theDayInfo"
+        android:layout_toRightOf="@+id/theDayInfo" />
+
     <TextView
         android:id="@+id/tempInfo"
         android:layout_width="wrap_content"
